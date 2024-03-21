@@ -1,0 +1,9 @@
+pyyaml
+tqdm
+gym==0.21.0
+numpy==1.24.2
+torch==1.7.1
+torchaudio==0.7.2
+torchvision==0.8.2
+tensorboard==2.12.0
+mujoco_py==2.0.2.5
