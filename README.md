@@ -6,7 +6,7 @@ You can install Python libraries using `pip install -r requirements.txt`. Note t
 You can train experts using soft actor-critic (SAC) [[1,2]](#references).  
 
 ```bash
-python train_expert.py --cuda --env_name PointMaze-Right --num_steps 1000000 --seed 0
+python train_expert.py --cuda --env_id PointMaze-Right --num_steps 1000000 --seed 0
 ```
 
 Its seed is named "seed0-20230805-1354" for instance. 
@@ -16,7 +16,7 @@ You need to collect demonstrations using the trained expert's weight. Note that 
 
 ```bash
 python collect_demo.py \
-    --cuda --env_name PointMaze-Right \
+    --cuda --env_id PointMaze-Right \
     --weight logs/PointMaze-Right/sac/seed0-20230805-1354/model/step1000000/actor.pth \
     --buffer_size 1000000 --std 0.01 --p_rand 0.0 --seed 0
 ```
