@@ -62,3 +62,20 @@ class TwinnedStateActionFunction(nn.Module):
 
     def q1(self, states, actions):
         return self.net1(torch.cat([states, actions], dim=-1))
+
+
+class DeterministicCritic(nn.Module):
+    def __init__(self, state_shape, action_shape, hidden_units=(400, 300), hidden_activation=nn.ReLU(inplace=True)):
+        super().__init__()
+
+        self.net = build_mlp(
+            input_dim=state_shape[0] + action_shape[0],
+            output_dim=1,
+            hidden_units=hidden_units,
+            hidden_activation=hidden_activation
+        )
+
+    def forward(self, states, actions):
+        return self.net(torch.cat([states, actions], dim=-1))
+
+

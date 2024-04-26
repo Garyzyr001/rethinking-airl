@@ -1,3 +1,3 @@
-from .policy import StateIndependentPolicy, StateDependentPolicy
-from .value import StateFunction, StateActionFunction, TwinnedStateActionFunction
+from .policy import StateIndependentPolicy, StateDependentPolicy, DeterministicActor
+from .value import StateFunction, StateActionFunction, TwinnedStateActionFunction, DeterministicCritic
 from .disc import GAILDiscrim, AIRLDiscrim

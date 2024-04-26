@@ -45,6 +45,17 @@ python train_transfer_imitation.py \
     --load_seed 0 --load_time 20231226-1522 --cuda_id 0
 ```
 
+### Train TD3-AIRL
+You can train TD3-AIRL in the source environment using the demonstrations in `buffers/`. For example, 
+
+```bash
+python train_airl.py \
+    --cuda --env_id PointMaze-Right \
+    --buffer buffers/PointMaze-Right/size1000000_std0.01_prand0.0.pth \
+    --num_steps 1500000 --eval_interval 5000 --rollout_length 128 --seed 0 \
+    --algo 'airl_td3' --epoch_disc 1 --epoch_policy 16 --batch_size 128 --cuda_id 0
+```
+
 
 ## References
 [[1]](https://arxiv.org/abs/1801.01290) Haarnoja, Tuomas, et al. "Soft actor-critic: Off-policy maximum entropy deep reinforcement learning with a stochastic actor." arXiv preprint arXiv:1801.01290 (2018).

@@ -58,3 +58,30 @@ class StateDependentPolicy(nn.Module):
         means = torch.tanh(means)
         return evaluate_lop_pi(means, log_stds, actions)
 
+
+class DeterministicActor(nn.Module):
+    def __init__(self, state_shape, action_shape, hidden_units=(400, 300),
+                 hidden_activation=nn.ReLU(inplace=True)):
+        super().__init__()
+
+        self.net = build_mlp(
+            input_dim=state_shape[0],
+            output_dim=action_shape[0],
+            hidden_units=hidden_units,
+            hidden_activation=hidden_activation
+        )
+
+        self.log_stds = nn.Parameter(torch.zeros(1, action_shape[0]))
+
+    def forward(self, states):
+        return torch.tanh(self.net(states))
+
+    def evaluate_log_pi(self, states, actions):
+        means = self.net(states)
+        means = torch.tanh(means)
+        return evaluate_lop_pi(means, self.log_stds, actions)
+
+    def sample(self, states):
+        return reparameterize(self.net(states), self.log_stds)
+
+
